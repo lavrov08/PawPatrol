@@ -38,8 +38,8 @@ public sealed class Pet : Entity
         BirthDate = birthDate;
         IsVaccinated = isVaccinated;
         PetStatus = petStatus;
-        Requisites = requisites.ToList();
-        PetPhotos = petPhotos.ToList();
+        _requisites = requisites.ToList();
+        _petPhotos = petPhotos.ToList();
     }
 
     /// <summary>
@@ -129,9 +129,13 @@ public sealed class Pet : Entity
     
     public PetStatus PetStatus { get; private set; }
     
-    public IReadOnlyCollection<Requisite> Requisites { get; private set; }
+    private readonly List<Requisite> _requisites;
     
-    public IReadOnlyCollection<PetPhoto> PetPhotos { get; private set; }
+    public IReadOnlyCollection<Requisite> Requisites => _requisites.AsReadOnly();
     
+    private readonly List<PetPhoto> _petPhotos;
+
+    public IReadOnlyList<PetPhoto> PetPhotos => _petPhotos.AsReadOnly();
+
     public DateTime DateCreated { get; private set; } = DateTime.Now;
 }
