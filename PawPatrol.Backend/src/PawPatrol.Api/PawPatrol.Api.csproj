@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PawPatrol.Application\PawPatrol.Application.csproj" />
       <ProjectReference Include="..\PawPatrol.Infrastructure\PawPatrol.Infrastructure.csproj" />
     </ItemGroup>
 
