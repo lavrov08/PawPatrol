@@ -20,7 +20,9 @@ public sealed class Pet : Entity
         bool isVaccinated,
         DateTime birthDate,
         PetStatus petStatus,
-        IEnumerable<Requisite> requisites) : base(id)
+        IEnumerable<Requisite> requisites,
+        IEnumerable<PetPhoto> petPhotos
+        ) : base(id)
     {
         Name = name;
         Kind = kind;
@@ -37,6 +39,7 @@ public sealed class Pet : Entity
         IsVaccinated = isVaccinated;
         PetStatus = petStatus;
         Requisites = requisites.ToList();
+        PetPhotos = petPhotos.ToList();
     }
 
     /// <summary>
@@ -57,6 +60,7 @@ public sealed class Pet : Entity
     /// <param name="birthDate">The birth date of the pet.</param>
     /// <param name="petStatus">The status of the pet.</param>
     /// <param name="requisites">The collection of requisites of the pet.</param>
+    /// <param name="petPhotos">The collection of photos of the pet.</param>
     /// <returns>A new <see cref="Pet"/> instance.</returns>
     public static Pet Create(
         Name name,
@@ -72,7 +76,8 @@ public sealed class Pet : Entity
         bool isVaccinated,
         DateTime birthDate,
         PetStatus petStatus,
-        IEnumerable<Requisite> requisites)
+        IEnumerable<Requisite> requisites,
+        IEnumerable<PetPhoto> petPhotos)
     {
         var pet = new Pet(
             Guid.NewGuid(), 
@@ -90,7 +95,8 @@ public sealed class Pet : Entity
             isVaccinated, 
             birthDate, 
             petStatus, 
-            requisites);
+            requisites,
+            petPhotos);
         
         return pet;
     }
@@ -124,6 +130,8 @@ public sealed class Pet : Entity
     public PetStatus PetStatus { get; private set; }
     
     public IReadOnlyCollection<Requisite> Requisites { get; private set; }
+    
+    public IReadOnlyCollection<PetPhoto> PetPhotos { get; private set; }
     
     public DateTime DateCreated { get; private set; } = DateTime.Now;
 }
