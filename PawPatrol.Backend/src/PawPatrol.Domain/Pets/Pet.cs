@@ -58,9 +58,40 @@ public sealed class Pet : Entity
     /// <param name="petStatus">The status of the pet.</param>
     /// <param name="requisites">The collection of requisites of the pet.</param>
     /// <returns>A new <see cref="Pet"/> instance.</returns>
-    public static Pet Create(Name name, Kind kind, Description description, Breed breed, Color color, HealthInfo healthInfo, Adress address, double weight, double height, PhoneNumber phoneNumber, bool isCastrated, bool isVaccinated, DateTime birthDate, PetStatus petStatus, IEnumerable<Requisite> requisites)
+    public static Pet Create(
+        Name name,
+        Kind kind, 
+        Description description, 
+        Breed breed, Color color,
+        HealthInfo healthInfo,
+        Adress address,
+        double weight,
+        double height,
+        PhoneNumber phoneNumber,
+        bool isCastrated,
+        bool isVaccinated,
+        DateTime birthDate,
+        PetStatus petStatus,
+        IEnumerable<Requisite> requisites)
     {
-        var pet = new Pet(Guid.NewGuid(), name, kind, description, breed, color, healthInfo, address, weight, height, phoneNumber, isCastrated, isVaccinated, birthDate, petStatus, requisites);
+        var pet = new Pet(
+            Guid.NewGuid(), 
+            name, 
+            kind, 
+            description,
+            breed,
+            color,
+            healthInfo,
+            address, 
+            weight, 
+            height, 
+            phoneNumber,
+            isCastrated, 
+            isVaccinated, 
+            birthDate, 
+            petStatus, 
+            requisites);
+        
         return pet;
     }
 
