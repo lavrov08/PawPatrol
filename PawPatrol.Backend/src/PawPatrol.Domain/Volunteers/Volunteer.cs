@@ -4,7 +4,7 @@ using PawPatrol.Domain.Shared;
 
 namespace PawPatrol.Domain.Volunteers;
 
-public class Volunteer:Entity
+public sealed class Volunteer:Entity
 { 
     public Name Name { get; private set; }
     
@@ -15,14 +15,10 @@ public class Volunteer:Entity
     public Description Description { get; private set; }
     
     public int Experience { get; private set; }
-
-    private readonly List<SocialNetwork> _socialNetworks;
     
-    public IReadOnlyCollection<SocialNetwork> SocialNetworks => _socialNetworks.AsReadOnly();
+    public SocialNetworkReadOnlyCollection SocialNetworks { get; private set; }
     
-    private readonly List<Requisite> _requisites;
-    
-    public IReadOnlyCollection<Requisite> Requisites => _requisites.AsReadOnly();
+    public RequisiteReadOnlyCollection Requisites { get; private set; }
     
     private readonly List<Pet> _pets;
     
@@ -41,8 +37,8 @@ public class Volunteer:Entity
         PhoneNumber phoneNumber,
         Description description,
         int experience,
-        List<SocialNetwork> socialNetworks,
-        List<Requisite> requisites,
+        SocialNetworkReadOnlyCollection socialNetworks,
+        RequisiteReadOnlyCollection requisites,
         List<Pet> pets) 
         : base(id)
     {
@@ -51,8 +47,8 @@ public class Volunteer:Entity
         PhoneNumber = phoneNumber;
         Description = description;
         Experience = experience;
-        _socialNetworks = socialNetworks;
-        _requisites = requisites;
+        SocialNetworks = socialNetworks;
+        Requisites = requisites;
         _pets = pets;
     }
 
@@ -62,8 +58,8 @@ public class Volunteer:Entity
         PhoneNumber phoneNumber,
         Description description,
         int experience,
-        List<SocialNetwork> socialNetworks,
-        List<Requisite> requisites,
+        SocialNetworkReadOnlyCollection socialNetworks,
+        RequisiteReadOnlyCollection requisites,
         List<Pet> pets)
     {
         var volunteer = new Volunteer(
@@ -79,4 +75,7 @@ public class Volunteer:Entity
         
         return volunteer;
     }
+    
+    //ef core 
+    private Volunteer(){ }
 }
