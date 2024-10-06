@@ -1,10 +1,13 @@
 using PawPatrol.Domain.Abstractions;
 using PawPatrol.Domain.Shared;
+using PawPatrol.Domain.Volunteers;
 
 namespace PawPatrol.Domain.Pets;
 
 public sealed class Pet : Entity
 {
+    //Ef Core
+    private Pet(){}
     private Pet(Guid id,
         Name name,
         Kind kind,
@@ -20,8 +23,8 @@ public sealed class Pet : Entity
         bool isVaccinated,
         DateTime birthDate,
         PetStatus petStatus,
-        IEnumerable<Requisite> requisites,
-        IEnumerable<PetPhoto> petPhotos
+        RequisiteReadOnlyCollection requisites,
+        PetPhotoReadOnlyCollection petPhotos
         ) : base(id)
     {
         Name = name;
@@ -38,8 +41,8 @@ public sealed class Pet : Entity
         BirthDate = birthDate;
         IsVaccinated = isVaccinated;
         PetStatus = petStatus;
-        _requisites = requisites.ToList();
-        _petPhotos = petPhotos.ToList();
+        Requisites = requisites;
+        PetPhotos = petPhotos;
     }
 
     /// <summary>
@@ -76,8 +79,8 @@ public sealed class Pet : Entity
         bool isVaccinated,
         DateTime birthDate,
         PetStatus petStatus,
-        IEnumerable<Requisite> requisites,
-        IEnumerable<PetPhoto> petPhotos)
+        RequisiteReadOnlyCollection requisites,
+        PetPhotoReadOnlyCollection petPhotos)
     {
         var pet = new Pet(
             Guid.NewGuid(), 
@@ -129,13 +132,9 @@ public sealed class Pet : Entity
     
     public PetStatus PetStatus { get; private set; }
     
-    private readonly List<Requisite> _requisites;
-    
-    public IReadOnlyCollection<Requisite> Requisites => _requisites.AsReadOnly();
-    
-    private readonly List<PetPhoto> _petPhotos;
+    public RequisiteReadOnlyCollection Requisites { get;private set; }
 
-    public IReadOnlyList<PetPhoto> PetPhotos => _petPhotos.AsReadOnly();
+    public PetPhotoReadOnlyCollection PetPhotos { get;private set; }
 
     public DateTime DateCreated { get; private set; } = DateTime.Now;
 }
