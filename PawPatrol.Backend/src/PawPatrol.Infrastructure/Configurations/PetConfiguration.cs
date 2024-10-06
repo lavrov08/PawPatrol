@@ -21,12 +21,11 @@ public class PetConfiguration: IEntityTypeConfiguration<Pet>
                 value => new Name(value)
             );
         
-        builder.Property(v => v.Kind)
-            .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT)
-            .HasConversion(
-                kind => kind.Value,
-                value => new Kind(value)
-            );
+        builder.ComplexProperty(x => x.Kind, navigationBuilder =>
+        {
+            navigationBuilder.Property(x => x.SpeciesId);
+            navigationBuilder.Property(x => x.BreedId);
+        });
         
         builder.Property(v => v.Description)
             .HasMaxLength(Constants.MAX_HIGHT_TEXT_LENGHT)
@@ -34,12 +33,6 @@ public class PetConfiguration: IEntityTypeConfiguration<Pet>
                 description => description.Value,
                 value => new Description(value)
             );
-        
-        builder.OwnsOne(v => v.Breed, navigationBuilder =>
-        {
-            navigationBuilder.Property(v => v.Value);
-        });
-        
         
         builder.Property(v => v.Color)
             .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT)
