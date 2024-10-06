@@ -1,3 +1,3 @@
 namespace PawPatrol.Domain.Pets;
 
-public record Kind(string Value);
+public record Kind(Guid SpeciesId, Guid BreedId);

@@ -1,5 +1,6 @@
 using PawPatrol.Domain.Abstractions;
 using PawPatrol.Domain.Shared;
+using PawPatrol.Domain.Specieses;
 using PawPatrol.Domain.Volunteers;
 
 namespace PawPatrol.Domain.Pets;
@@ -12,7 +13,6 @@ public sealed class Pet : Entity
         Name name,
         Kind kind,
         Description description,
-        Breed breed,
         Color color,
         HealthInfo healthInfo,
         Adress address,
@@ -30,7 +30,6 @@ public sealed class Pet : Entity
         Name = name;
         Kind = kind;
         Description = description;
-        Breed = breed;
         Color = color;
         HealthInfo = healthInfo;
         Address = address;
@@ -51,7 +50,6 @@ public sealed class Pet : Entity
     /// <param name="name">The name of the pet.</param>
     /// <param name="kind">The kind of the pet.</param>
     /// <param name="description">A description of the pet.</param>
-    /// <param name="breed">The breed of the pet.</param>
     /// <param name="color">The color of the pet.</param>
     /// <param name="healthInfo">The health information of the pet.</param>
     /// <param name="address">The address of the pet.</param>
@@ -69,7 +67,7 @@ public sealed class Pet : Entity
         Name name,
         Kind kind, 
         Description description, 
-        Breed breed, Color color,
+        Color color,
         HealthInfo healthInfo,
         Adress address,
         double weight,
@@ -87,7 +85,6 @@ public sealed class Pet : Entity
             name, 
             kind, 
             description,
-            breed,
             color,
             healthInfo,
             address, 
@@ -109,8 +106,6 @@ public sealed class Pet : Entity
     public Kind Kind { get; private set; }
     
     public Description Description { get; private set; }
-    
-    public Breed Breed { get; private set; }
     
     public Color Color { get; private set; }
     
