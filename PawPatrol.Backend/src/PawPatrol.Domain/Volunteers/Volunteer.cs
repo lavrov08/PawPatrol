@@ -15,18 +15,24 @@ public class Volunteer:Entity
     public Description Description { get; private set; }
     
     public int Experience { get; private set; }
+
+    private readonly List<SocialNetwork> _socialNetworks;
     
-    public IReadOnlyCollection<SocialNetwork> SocialNetworks { get; private set; }
+    public IReadOnlyCollection<SocialNetwork> SocialNetworks => _socialNetworks.AsReadOnly();
     
-    public IReadOnlyCollection<Requisite> Requisites { get; private set; }
+    private readonly List<Requisite> _requisites;
     
-    public IReadOnlyCollection<Pet> Pets { get; private set; }
+    public IReadOnlyCollection<Requisite> Requisites => _requisites.AsReadOnly();
     
-    public int PetsFoundHomeCount() => Pets.Count(pet => pet.PetStatus == PetStatus.FoundHome);
+    private readonly List<Pet> _pets;
     
-    public int PetsSeekingHomeCount() => Pets.Count(pet=> pet.PetStatus == PetStatus.SeeksHome);
+    public IReadOnlyCollection<Pet> Pets => _pets.AsReadOnly();
     
-    public int PetsOnTreatmentCount() => Pets.Count(pet=> pet.PetStatus == PetStatus.OnTreatment);
+    public int PetsFoundHomeCount() => _pets.Count(pet => pet.PetStatus == PetStatus.FoundHome);
+    
+    public int PetsSeekingHomeCount() => _pets.Count(pet=> pet.PetStatus == PetStatus.SeeksHome);
+    
+    public int PetsOnTreatmentCount() => _pets.Count(pet=> pet.PetStatus == PetStatus.OnTreatment);
 
     private Volunteer(
         Guid id,
@@ -45,9 +51,9 @@ public class Volunteer:Entity
         PhoneNumber = phoneNumber;
         Description = description;
         Experience = experience;
-        SocialNetworks = socialNetworks;
-        Requisites = requisites;
-        Pets = pets; 
+        _socialNetworks = socialNetworks;
+        _requisites = requisites;
+        _pets = pets;
     }
 
     public static Volunteer Create(
